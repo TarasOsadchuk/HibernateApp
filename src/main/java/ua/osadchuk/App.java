@@ -3,12 +3,13 @@ package ua.osadchuk;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ua.osadchuk.model.Item;
+import ua.osadchuk.model.Passport;
 import ua.osadchuk.model.Person;
 
 public class App {
     public static void main(String[] args) {
-        Configuration configuration = new Configuration().addAnnotatedClass(Person.class).addAnnotatedClass(Item.class);
+        Configuration configuration = new Configuration()
+                .addAnnotatedClass(Person.class).addAnnotatedClass(Passport.class);
 
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.getCurrentSession();
@@ -16,12 +17,27 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = new Person("Test cascading 3", 30);
-            person.addItem(new Item("Test item 3.1"));
-            person.addItem(new Item("Test item 3.2"));
-            person.addItem(new Item("Test item 3.3"));
+//            Створення людина і паспорта:
+//            Person person = new Person("Taras", 21);
+//            Passport passport = new Passport(1123456);
+//            person.setPassport(passport);
+//            session.save(person);
 
-            session.save(person);
+//            Отримання номер пасторту, через людину:
+//            Person person = session.get(Person.class,1);
+//            System.out.println(person.getPassport().getPassportNumber());
+
+//            Отримання людини, по паспорту:
+//            Passport passport = session.get(Passport.class, 1);
+//            System.out.println(passport.getPerson().toString());
+
+//            Змінення номеру поспорта:
+//            Person person = session.get(Person.class, 1);
+//            person.getPassport().setPassportNumber(654321);
+
+//            Видалення лдини:
+//            Person person = session.get(Person.class, 1);
+//            session.remove(person);
 
             session.getTransaction().commit();
 
